@@ -1,3 +1,4 @@
+using CleanArch.Infra.Ioc;
 using CleanArch.Infrastructure.Data.Context;
 using CleanArch.MVc.Data;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,9 @@ namespace CleanArch.MVc
             });
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            //Calling the method
+            RegistorServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +75,13 @@ namespace CleanArch.MVc
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+         }
+
+        //Dependency Container
+        private static void RegistorServices(IServiceCollection services)
+        {
+            DependencyContainer.RegistorServices(services);
         }
     }
 }
+
